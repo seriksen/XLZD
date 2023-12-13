@@ -17,9 +17,12 @@ RUN echo "${DOCKER_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER $DOCKER_USER
 WORKDIR /home/${DOCKER_USER}
 
+RUN sudo dnf group install "Development Tools" -y
+RUN sudo dnf makecache --refresh
+
+
 # Standard software_installs.sh
-RUN sudo dnf install -y xorg-x11-apps.x86_64 \
-                            xauth \
+RUN sudo dnf install -y     xauth \
                             pciutils \
                             lshw \
                             epel-release \
@@ -50,17 +53,16 @@ RUN sudo dnf install -y xorg-x11-apps.x86_64 \
                             qt5-qtbase \
                             qt5-qtbase-devel \
                             freetype \
-                            freetype-devel \
-                            qt6-qtbase \
-                            qt6-qtbase-devel \
-                            hdf5 \
-                            hdf5-devel
+                            freetype-devel
+                            #qt6-qtbase \
+                            #qt6-qtbase-devel \
+                            #hdf5 \
+                            #hdf5-devel
 
 
 
 # Virtual GL and TurboVNC and Desktop for remote dev with graphics support
 RUN sudo dnf -y install https://downloads.sourceforge.net/project/virtualgl/2.6.3/VirtualGL-2.6.3.x86_64.rpm \
-                        lightgdm \
                         https://downloads.sourceforge.net/project/turbovnc/2.2.4/turbovnc-2.2.4.x86_64.rpm
 
 RUN sudo dnf -y groupinstall "X Window System" \
