@@ -17,6 +17,8 @@ RUN echo "${DOCKER_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER $DOCKER_USER
 WORKDIR /home/${DOCKER_USER}
 
+RUN sudo dnf group install "Development Tools" -y
+
 # Standard software_installs.sh
 RUN sudo dnf install -y xorg-x11-apps.x86_64 \
                             xauth \
