@@ -70,8 +70,3 @@ RUN sudo dnf -y install https://downloads.sourceforge.net/project/virtualgl/2.6.
 COPY bashrc_edits.sh /home/${DOCKER_USER}/.bashrc_edits.sh
 RUN cd && echo "source ${HOME}/.bashrc_edits.sh" >> .bashrc
 
-# Volumes from CVMFS
-VOLUME ["/cvmfs/sft.cern.ch"]
-
-# Final
-ENTRYPOINT ["/docker-entrypoint.sh"]

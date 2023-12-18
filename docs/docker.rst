@@ -50,3 +50,11 @@ xorg-x11-apps.x86_64 \
     qt6-qtbase-devel \
     hdf5 \
     hdf5-devel
+
+
+setup software
+~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+    source /cvmfs/sft.cern.ch/lcg/views/LCG_104/x86_64-el9-gcc12-opt/setup.sh
