@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream9
+FROM rockylinux:9.3
 
 LABEL authors="Sam Eriksen"
 
@@ -39,7 +39,6 @@ RUN sudo dnf install -y     xauth \
                             mesa-libGLw-devel \
                             freeglut-devel \
                             freeglut \
-                            doxygen \
                             libXmu-devel \
                             libXi-devel \
                             libGL-devel \
@@ -54,7 +53,8 @@ RUN sudo dnf install -y     xauth \
                             qt5-qtbase-devel \
                             freetype \
                             freetype-devel
-                            #qt6-qtbase \
+                            #doxygen \
+                            #qt6-qtbase
                             #qt6-qtbase-devel \
                             #hdf5 \
                             #hdf5-devel
@@ -65,12 +65,13 @@ RUN sudo dnf install -y     xauth \
 RUN sudo dnf -y install https://downloads.sourceforge.net/project/virtualgl/2.6.3/VirtualGL-2.6.3.x86_64.rpm \
                         https://downloads.sourceforge.net/project/turbovnc/2.2.4/turbovnc-2.2.4.x86_64.rpm
 
-# Install Geant4 and some other bits
-COPY software_installs.sh /home/${DOCKER_USER}
-RUN cd /home/${DOCKER_USER} \
-    && export SOFTWARE_INSTALL_DIR=/home/${DOCKER_USER}/software \
-    && bash software_installs.sh
 
 # Add .bashrc options for easier life
 COPY bashrc_edits.sh /home/${DOCKER_USER}/.bashrc_edits.sh
 RUN cd && echo "source ${HOME}/.bashrc_edits.sh" >> .bashrc
+
+# Volumes from CVMFS
+VOLUME ["/cvmfs/sft.cern.ch"]
+
+# Final
+ENTRYPOINT ["/docker-entrypoint.sh"]
