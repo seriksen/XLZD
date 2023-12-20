@@ -3,7 +3,12 @@ FROM rockylinux:9.3
 LABEL authors="Sam Eriksen"
 
 # Setup
-RUN dnf -y update
+RUN dnf update -y \
+ && dnf install dnf-plugins-core -y \
+ && dnf config-manager --enable crb \
+ && dnf install -y epel-release \
+ && dnf clean all
+
 RUN dnf -y install sudo
 
 # Set bash
@@ -22,44 +27,62 @@ RUN sudo dnf makecache --refresh
 
 
 # Standard software_installs.sh
-RUN sudo dnf install -y     xauth \
-                            pciutils \
-                            lshw \
-                            epel-release \
-                            wget \
-                            zip \
-                            unzip \
-                            git \
-                            libXcursor-devel \
-                            libXinerama-devel \
-                            libXrandr-devel \
-                            mesa-dri-drivers \
-                            mesa-libGLES \
-                            mesa-libGLw \
-                            mesa-libGLw-devel \
-                            freeglut-devel \
-                            freeglut \
-                            libXmu-devel \
-                            libXi-devel \
-                            libGL-devel \
-                            libGLU-devel \
-                            curl-devel \
-                            openssl-devel \
-                            g++ \
-                            gcc-c++ \
-                            cmake \
-                            boost-devel \
-                            qt5-qtbase \
-                            qt5-qtbase-devel \
-                            freetype \
-                            freetype-devel
-                            #doxygen \
-                            #qt6-qtbase
-                            #qt6-qtbase-devel \
-                            #hdf5 \
-                            #hdf5-devel
-
-
+RUN sudo dnf install -y \
+      atlas-devel \
+      autoconf \
+      automake \
+      blas-devel \
+      bluez-libs-devel \
+      bzip2 \
+      bzip2-devel \
+      emacs \
+      expat-devel \
+      gcc-c++ \
+      gdbm-devel \
+      ghostscript \
+      git \
+      glibc-devel \
+      gmp-devel \
+      graphviz \
+      ImageMagick \
+      jq \
+      json-c \
+      libdb-devel \
+      libffi-devel \
+      libtool \
+      libunwind-devel \
+      libuuid-devel \
+      libXmu-devel \
+      libXpm-devel \
+      make \
+      man \
+      mesa-libGLU-devel \
+      nano \
+      ncurses-devel \
+      openmotif-devel \
+      openssl-devel \
+      patch \
+      perl-Digest-MD5 \
+      platform-python-devel \
+      qt5-qtbase-devel \
+      qt5-qtscript-devel \
+      readline-devel \
+      sqlite-devel \
+      sudo \
+      systemtap-sdt-devel \
+      tcl-devel \
+      tix-devel \
+      tk-devel \
+      valgrind-devel \
+      vim-X11 \
+      vim-common \
+      vim-enhanced \
+      vim-minimal \
+      wget \
+      which \
+      zlib-devel \
+  && sudo dnf clean all \
+  && sudo rm -rf /var/cache/dnf/*
 
 # Virtual GL and TurboVNC and Desktop for remote dev with graphics support
 RUN sudo dnf -y install https://downloads.sourceforge.net/project/virtualgl/2.6.3/VirtualGL-2.6.3.x86_64.rpm \
@@ -69,4 +92,6 @@ RUN sudo dnf -y install https://downloads.sourceforge.net/project/virtualgl/2.6.
 # Add .bashrc options for easier life
 COPY bashrc_edits.sh /home/${DOCKER_USER}/.bashrc_edits.sh
 RUN cd && echo "source ${HOME}/.bashrc_edits.sh" >> .bashrc
+
+ENV DISPLAY=:0
 
