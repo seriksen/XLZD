@@ -93,5 +93,13 @@ RUN sudo dnf -y install https://downloads.sourceforge.net/project/virtualgl/2.6.
 COPY bashrc_edits.sh /home/${DOCKER_USER}/.bashrc_edits.sh
 RUN cd && echo "source ${HOME}/.bashrc_edits.sh" >> .bashrc
 
+# Geant4 install
+RUN mkdir -p /home/${DOCKER_USER}/software
+COPY geant4_install.sh /home/${DOCKER_USER}/software
+RUN cd /home/${DOCKER_USER}/software \
+    && export SOFTWARE_INSTALL_DIR="/home/${DOCKER_USER}/software" \
+    && source geant4_install.sh
+
+
 ENV DISPLAY=:0
 

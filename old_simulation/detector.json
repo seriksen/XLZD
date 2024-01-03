@@ -1,0 +1,66 @@
+{
+  "outerDetector": {
+    "Height": 12,
+    "Radius": 6,
+    "SteelShell": {
+      "Status": true,
+      "Thickness": 0.05
+    },
+    "PMT": {
+      "Status": true,
+      "Total": 20,
+      "Ladders": 6,
+      "Radius": 6,
+      "WallThickness": 0.001,
+      "Height": 0.2,
+      "Width": 0.2,
+      "Length": 0.25
+    }
+  },
+
+
+  "Material":{
+    "Titanium": true
+  },
+
+  "TPC":{
+    "Status": true,
+    "Height": 3,
+    "Radius": 2,
+    "GasHeight": 0.07,
+    "BaseHeight": 0.2,
+    "SteelShell": {
+      "Status": true,
+      "Thickness": 0.01
+    },
+    "OCV":{
+      "Diameter": 4.0,
+      "Height": 5.2,
+      "SteelShell":{
+        "Thickness": 0.012
+      }
+    },
+    "ICV":{
+      "Diameter": 3.62,
+      "Height": 4.8,
+      "SteelShell":{
+        "Thickness": 0.012
+      }
+    },
+    "Skin": {
+      "Thickness": 0.05
+    },
+    "PTFE": {
+      "Thickness": 0.020,
+      "RingThickness": 0.0025,
+      "RingHeight": 0.025
+    },
+    "PMT": {
+      "Status": true,
+      "WallThickness": 0.001,
+      "Height": 0.123,
+      "Radius": 0.076
+    }
+  }
+}
+
