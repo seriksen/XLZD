@@ -50,3 +50,11 @@ xorg-x11-apps.x86_64 \
     qt6-qtbase-devel \
     hdf5 \
     hdf5-devel
+
+
+setup software
+~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+    ::
